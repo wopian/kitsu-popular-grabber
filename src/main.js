@@ -15,19 +15,22 @@ Kitsu.headers['User-Agent'] = `PopularGrabber/${version} (wopian)`
 
 Kitsu.define('anime', {
   slug: '',
-  canonicalTitle: ''
+  canonicalTitle: '',
+  titles: ''
 })
 
 Kitsu.define('manga', {
   slug: '',
-  canonicalTitle: ''
+  canonicalTitle: '',
+  titles: ''
 })
 
 // Get response from API
 async function getPage (offset, mediaType) {
   return Kitsu.findAll(mediaType, {
     fields: {
-      anime: 'canonicalTitle,slug'
+      anime: 'canonicalTitle,titles,slug',
+      manga: 'canonicalTitle,titles,slug'
     },
     sort: 'popularityRank',
     page: {
@@ -58,7 +61,8 @@ async function displaySeason () {
   log('Most Popular Titles:\n')
 
   MEDIA.forEach((media) => {
-    log(`${media.canonicalTitle} (${media.id})`)
+    if (!media.titles.en) media.titles.en = media.canonicalTitle
+    log(`${media.titles.en} (${media.id})`)
     log(`https://kitsu.io/${media.type}/${media.slug}\n`)
   })
 }
