@@ -1,4 +1,4 @@
-# Season Grabber
+# Popular Grabber
 
 [![Github Rl]][1]
 [![Travis]][2]
