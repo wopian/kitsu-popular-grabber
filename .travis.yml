@@ -24,3 +24,5 @@ after_success:
 addons:
   code_climate:
     repo_token:
+notifications:
+  email: false
